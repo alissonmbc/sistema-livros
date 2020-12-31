@@ -1,0 +1,51 @@
+<nb-card>
+    <nb-card-header>
+        <h6>Análise</h6>
+    </nb-card-header>
+    <nb-card-body>
+        <div>
+            <form [formGroup]="form" (ngSubmit)="onSubmit(form.value)">
+                <input class="form-control" placeholder="Insira o nome de um livro..." formControlName="texto">
+            </form>
+        </div>
+        <nb-tabset>
+            <nb-tab tabTitle="Gráficos">
+                <div class="row d-flex justify-content-center" *ngIf="chartOptions.length > 0">
+                    <highcharts-chart
+                      [Highcharts]="highcharts"
+                      [options]="chartOptions[0]"
+                      style="height: 400px; display: block;">
+                    </highcharts-chart>
+                </div>
+            </nb-tab>
+            <nb-tab tabTitle="Regiões">
+                <div class="row col-12">
+                    <div class="col-6 d-flex align-items-stretch flex-column">    
+                        <p>{{this.titulo1}}</p>
+                        <ag-grid-angular
+                            style="width: 100%; height: 150px;"
+                            class="ag-theme-balham"
+                            [rowData]="gridOptions1.rowData"
+                            [columnDefs]="gridOptions1.columnDefs"
+                            *ngIf="gridOptions1.rowData.length > 0">
+                        </ag-grid-angular>
+                    </div>
+                    <div class="col-6 d-flex align-items-stretch flex-column">    
+                        <p>{{this.titulo2}}</p>
+                        <ag-grid-angular
+                            style="width: 100%; height: 150px;"
+                            class="ag-theme-balham"
+                            [rowData]="gridOptions2.rowData"
+                            [columnDefs]="gridOptions2.columnDefs"
+                            *ngIf="gridOptions2.rowData.length > 0">
+                        </ag-grid-angular>
+                    </div>
+                </div>
+            </nb-tab>
+        </nb-tabset>
+        <p class="d-flex justify-content-center" *ngIf="carregando">Carregando...</p>
+    </nb-card-body>
+    <nb-card-footer>
+        <p>Segundo o Google, <i>“os números representam o interesse de pesquisa relativo ao ponto mais alto no gráfico de uma determinada região em um dado período. Um valor de 100 representa o pico de popularidade de um termo. Um valor de 50 significa que o termo teve metade da popularidade. Uma pontuação de 0 significa que não havia dados suficientes sobre o termo.”</i></p>
+    </nb-card-footer>
+</nb-card>

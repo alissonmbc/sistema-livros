@@ -1,0 +1,67 @@
+.logo {
+    text-align: center !important;
+}
+
+.large {
+    font-size: 2.25rem !important;
+}
+
+.bg-green {
+    background-color: #00d68f;
+}
+
+.user-picture {
+    height: 35px;
+    width: 35px;
+    border: 8px solid #eeeeee;
+    border-radius: 50%;
+    flex-shrink: 0;
+    background-color: #f8f8f8;
+    box-sizing: inherit;
+    color: #fff !important;
+  }
+
+nav {
+    padding-top: 0px !important;
+    padding-bottom: 0px !important;
+}
+
+.nb-theme-default nb-menu .menu-item a:hover {
+    color: #00d68f !important;
+}
+
+.nb-theme-default nb-menu .menu-item a:hover .menu-icon {
+    color: #00d68f !important;
+}
+
+.nb-theme-default nb-menu .menu-item {
+    border-bottom: none !important;
+}
+
+.nb-theme-default nb-menu .menu-item a.active {
+    color: #00d68f !important;
+}
+
+.nb-theme-default nb-menu .menu-item a.active .menu-icon {
+    color: #00d68f !important;
+}
+
+.nb-theme-default nb-tabset .tab.active .tab-link {
+    color: #00d68f;
+}
+
+.nb-theme-default a:hover {
+    color: #00d68f;
+}
+
+.nb-theme-default nb-tabset .tab:hover .tab-link {
+    color: #00d68f;
+}
+
+.nb-theme-default nb-tabset .tab.active .tab-link::before {
+    background-color: #00d68f;
+}
+
+.nb-theme-default nb-tabset .tab:hover .tab-link::before {
+    background-color: #00d68f;
+}

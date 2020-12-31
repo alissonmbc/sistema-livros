@@ -1,0 +1,93 @@
+<nb-layout>
+    <nb-layout-header>
+        <div class="row w-100 h-100">
+            <div class="col-2 logo mt-4"><nb-icon icon="book-open-outline" status="success" class="large"></nb-icon></div>
+            <div class="col-8 bg-green">
+                <div class="col-4 mt-3">
+                    <div>
+                        <form [formGroup]="form" (ngSubmit)="onSubmit(form.value)">
+                            <input class="form-control" placeholder="Pesquisar..." formControlName="texto">
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-2 mt-4">
+                <div class="d-flex flex-row-reverse">
+                    <div class="col-8">
+                        <p>Olá, {{nomeUsuario}}.</p>
+                    </div>
+                    <div class="col-4 position-relative align-items-center d-block">
+                        <div class="user-picture d-flex justify-content-center align-items-center position-relative">
+                            <nb-icon icon="person-outline" status="success" class="large"></nb-icon>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nb-layout-header>
+    <nb-layout-column class="colored-column-warning" [nbSpinner]="spinner" nbSpinnerSize="xxsmall" nbSpinnerMessage="Carregando...">
+        <div class="row w-100">
+            <div class="col-2"><nb-menu id="menu-layout" [items]="menuItems" *ngIf="livroSelecionado"></nb-menu></div>
+            <div class="col-8">
+                <div class="row" *ngIf="livroSelecionado">
+                    <nb-card class="col-4">
+                        <nb-card-header>
+                            <nb-icon icon="book-outline" class="large"></nb-icon>
+                            <h6>Título</h6>
+                        </nb-card-header>
+                        <nb-card-body>
+                            {{livroSelecionado.volumeInfo.title}}
+                        </nb-card-body>
+                    </nb-card>
+                    <nb-card class="col-4">
+                        <nb-card-header>
+                            <nb-icon icon="edit-2-outline" class="large"></nb-icon>
+                            <h6>Autores</h6>
+                        </nb-card-header>
+                        <nb-card-body>
+                            {{autores}}
+                        </nb-card-body>
+                    </nb-card>
+                    <nb-card class="col-4">
+                        <nb-card-header>
+                            <nb-icon icon="code-outline" class="large"></nb-icon>
+                            <h6>Identificador</h6>
+                        </nb-card-header>
+                        <nb-card-body>
+                            {{livroSelecionado.volumeInfo.industryIdentifiers[0].identifier}}
+                        </nb-card-body>
+                    </nb-card>
+                </div>
+                <router-outlet></router-outlet>
+            </div>
+            <div class="col-2 d-flex flex-row-reverse">
+                <div *ngIf="livroSelecionado">
+                    <div class="mb-1" *ngIf="livroSelecionado.saleInfo.listPrice && livroSelecionado.saleInfo.listPrice.amount">
+                        Valor: {{valor}}
+                    </div>
+                    <div class="mb-1" *ngIf="livroSelecionado.volumeInfo.description">
+                        Descrição: {{livroSelecionado.volumeInfo.description}}
+                    </div>
+                    <div class="mb-1" *ngIf="livroSelecionado.volumeInfo.language">
+                        Idioma: {{livroSelecionado.volumeInfo.language}}
+                    </div>
+                    <div class="mb-1" *ngIf="livroSelecionado.volumeInfo.publisher">
+                        Editora: {{livroSelecionado.volumeInfo.publisher}}
+                    </div>
+                    <div class="mb-1" *ngIf="livroSelecionado.volumeInfo.publishedDate">
+                        Data de Lançamento: {{livroSelecionado.volumeInfo.publishedDate}}
+                    </div>
+                    <div class="mb-4 pb-4" *ngIf="livroSelecionado.volumeInfo.pageCount">
+                        Número de Páginas: {{livroSelecionado.volumeInfo.pageCount}}
+                    </div>
+                    <div class="mb-1 mt-4 pt-4" *ngIf="this.livroSelecionado.accessInfo.webReaderLink">
+                        <button nbButton size="small" status="success" (click)="abrirWebReader()"><nb-icon icon="file-text-outline"></nb-icon> Ler Trecho</button>
+                    </div>
+                    <div *ngIf="this.livroSelecionado.saleInfo.buyLink">
+                        <button nbButton size="small" status="success" (click)="abrirPlayStore()"><nb-icon icon="shopping-cart-outline"></nb-icon> Visualizar na Play Store</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nb-layout-column>
+</nb-layout>

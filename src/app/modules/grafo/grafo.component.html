@@ -1,0 +1,28 @@
+<nb-card>
+    <nb-card-header>
+        <h6>Grafo</h6>
+    </nb-card-header>
+    <nb-card-body>
+        <nb-tabset>
+            <nb-tab tabTitle="Tópicos">
+                <div class="row d-flex justify-content-center" *ngIf="chartOptions.length === 2">
+                    <highcharts-chart
+                        [Highcharts]="highcharts"
+                        [options]="chartOptions[0]"
+                        style="height: 400px; display: block;">
+                    </highcharts-chart>
+                </div>
+            </nb-tab>
+            <nb-tab tabTitle="Termos de Pesquisa">
+                <div class="row d-flex justify-content-center" *ngIf="chartOptions.length === 2">
+                    <highcharts-chart
+                        [Highcharts]="highcharts"
+                        [options]="chartOptions[1]"
+                        style="height: 400px; display: block;">
+                    </highcharts-chart>
+                </div>
+            </nb-tab>
+        </nb-tabset>
+        <p class="d-flex justify-content-center" *ngIf="!(chartOptions.length > 1)">Carregando...</p>
+    </nb-card-body>
+</nb-card>
