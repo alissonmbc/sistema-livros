@@ -8,6 +8,6 @@ import { BookService } from 'src/app/shared/services/book.service';
 })
 export class LogoutServiceComponent {
   constructor(private bookService: BookService) {
-    this.bookService.logout(); 
+    this.bookService.logout();
   }
 }

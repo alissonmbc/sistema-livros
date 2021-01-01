@@ -14,6 +14,6 @@ export class AuthenticationComponent {
   constructor(private bookService: BookService) {}
 
   login() {
-   this.bookService.login(); 
+   this.bookService.login();
   }
 }

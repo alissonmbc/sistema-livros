@@ -5,7 +5,7 @@ import { map } from 'rxjs/operators';
 
 import { BookService } from 'src/app/shared/services/book.service';
 
-import * as Highcharts from "highcharts";
+import * as Highcharts from 'highcharts';
 
 @Component({
     selector: 'app-visao-geral',
@@ -17,7 +17,7 @@ import * as Highcharts from "highcharts";
     highcharts = Highcharts;
     chartOptions = [];
     gridAvailable = false;
-    
+
     gridOptions = {
         columnDefs: [
             {headerName: 'Região', field: 'regiao', minWidth: 450},
@@ -25,40 +25,40 @@ import * as Highcharts from "highcharts";
         ],
         rowData: []
     };
-  
+
     constructor(private bookService: BookService,
-      private http: HttpClient) { }
+                private http: HttpClient) { }
 
     ngOnInit() {
       this.bookService.data$.subscribe(res => {
-        if(res) {
+        if (res) {
           this.http.get<any>('http://localhost:3000/interestOverTime/' + res.volumeInfo.title).pipe(map( data => {
             return data;
           })).subscribe(data => {
             this.chartOptions = [];
-            var series = [];
-            var categories = [];
+            const series = [];
+            const categories = [];
             data.default.timelineData.forEach(element => {
               series.push(element.value[0]);
               categories.push(element.formattedAxisTime);
             });
             this.chartOptions.push({
               chart: {
-                type: "line",
+                type: 'line',
               },
               title: {
-                text: "Interesse através do Tempo",
+                text: 'Interesse através do Tempo',
               },
               subtitle: {
-                text: "Fonte: Google Trends",
+                text: 'Fonte: Google Trends',
               },
               yAxis: {
                 title: {
-                  text: "Valores",
+                  text: 'Valores',
                 },
               },
               xAxis: {
-                categories: categories,
+                categories,
               },
               plotOptions: {
                 line: {
@@ -71,37 +71,37 @@ import * as Highcharts from "highcharts";
               series: [
                 {
                   name: res.volumeInfo.title,
-                  color: "#00d68f",
+                  color: '#00d68f',
                   data: series,
                 },
               ],
             });
-            this.http.get<any>('http://localhost:3000/interestOverTime/' + res.volumeInfo.authors[0]).pipe(map( data => {
-              return data;
-            })).subscribe(data => {
-              var series = [];
-              var categories = [];
-              data.default.timelineData.forEach(element => {
-                series.push(element.value[0]);
-                categories.push(element.formattedAxisTime);
+            this.http.get<any>('http://localhost:3000/interestOverTime/' + res.volumeInfo.authors[0]).pipe(map( interest => {
+              return interest;
+            })).subscribe( data2 => {
+              const series2 = [];
+              const categories2 = [];
+              data2.default.timelineData.forEach(element => {
+                series2.push(element.value[0]);
+                categories2.push(element.formattedAxisTime);
               });
               this.chartOptions.push({
                 chart: {
-                  type: "line",
+                  type: 'line',
                 },
                 title: {
-                  text: "Interesse através do Tempo",
+                  text: 'Interesse através do Tempo',
                 },
                 subtitle: {
-                  text: "Fonte: Google Trends",
+                  text: 'Fonte: Google Trends',
                 },
                 yAxis: {
                   title: {
-                    text: "Valores",
+                    text: 'Valores',
                   },
                 },
                 xAxis: {
-                  categories: categories,
+                  categories2,
                 },
                 plotOptions: {
                   line: {
@@ -114,8 +114,8 @@ import * as Highcharts from "highcharts";
                 series: [
                   {
                     name: res.volumeInfo.authors[0],
-                    color: "#00d68f",
-                    data: series,
+                    color: '#00d68f',
+                    data: series2,
                   },
                 ],
               });
@@ -123,11 +123,12 @@ import * as Highcharts from "highcharts";
           });
           this.http.get<any>('http://localhost:3000/interestByRegion/' + res.volumeInfo.title).pipe(map( data => {
             return data;
-          })).subscribe(data => {
+          })).subscribe( data => {
             this.gridOptions.rowData = [];
-            for(let i = 0;i<10;i++) {
-              if (data.default.geoMapData[i] && data.default.geoMapData[i].value[0] > 0)
+            for (let i = 0; i < 10; i++) {
+              if (data.default.geoMapData[i] && data.default.geoMapData[i].value[0] > 0) {
                 this.gridOptions.rowData.push({regiao: data.default.geoMapData[i].geoName, apice: data.default.geoMapData[i].value[0]});
+              }
             }
             this.gridAvailable = true;
           });

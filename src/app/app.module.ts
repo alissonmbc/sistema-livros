@@ -22,7 +22,7 @@ import {BookService} from './shared/services/book.service';
 import { NbThemeModule, NbLayoutModule, NbIconModule, NbMenuModule, NbButtonModule, NbCardModule, NbSpinnerModule, NbTabsetModule } from '@nebular/theme';
 import { NbEvaIconsModule } from '@nebular/eva-icons';
 
-import {AgGridModule} from "ag-grid-angular";
+import {AgGridModule} from 'ag-grid-angular';
 import {HighchartsChartModule} from 'highcharts-angular';
 
 import { AngularFireModule } from '@angular/fire';
@@ -34,11 +34,11 @@ import { AppComponent } from './app.component';
 registerLocaleData(localePt, 'pt-BR');
 
 const config = {
-  apiKey: "AIzaSyAmmRlJ-GGjKS17viQf9zwBzf7izAyUWL8",
-  authDomain: "bookfinder-6ee00.firebaseapp.com",
-  databaseURL: "https://bookfinder-6ee00-default-rtdb.firebaseio.com/",
-  storageBucket: "bookfinder-6ee00.appspot.com",
-  messagingSenderId: "470251622623"
+  apiKey: 'AIzaSyAmmRlJ-GGjKS17viQf9zwBzf7izAyUWL8',
+  authDomain: 'bookfinder-6ee00.firebaseapp.com',
+  databaseURL: 'https://bookfinder-6ee00-default-rtdb.firebaseio.com/',
+  storageBucket: 'bookfinder-6ee00.appspot.com',
+  messagingSenderId: '470251622623'
 };
 
 @NgModule({

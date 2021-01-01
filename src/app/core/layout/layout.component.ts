@@ -26,10 +26,10 @@ import { BookService } from 'src/app/shared/services/book.service';
     {title: 'Sair', link: '/logout', icon: 'log-out-outline'}];
 
     form;
-  
+
     constructor(private formBuilder: FormBuilder,
-      private router: Router,
-      private bookService: BookService) {
+                private router: Router,
+                private bookService: BookService) {
         this.form = this.formBuilder.group({
           texto: ''
         });
@@ -39,9 +39,8 @@ import { BookService } from 'src/app/shared/services/book.service';
       this.bookService.data$.subscribe(res => {
         this.spinner = true;
         this.livroSelecionado = res;
-        console.log(res);
-        if(res) {
-          if(this.livroSelecionado.saleInfo.listPrice) {
+        if (res) {
+          if (this.livroSelecionado.saleInfo.listPrice) {
             const currencyPipe: CurrencyPipe = new CurrencyPipe('pt-BR');
             this.valor = currencyPipe.transform(this.livroSelecionado.saleInfo.listPrice.amount, 'BRL');
           }
@@ -50,7 +49,7 @@ import { BookService } from 'src/app/shared/services/book.service';
             this.autores += element + '; ';
           });
           this.menuItems.forEach(element => {
-            if(!element.link.endsWith("logout")) {
+            if (!element.link.endsWith('logout')) {
               const url = element.link.split('/')[1];
               element.link = '/' + url + '/' + this.livroSelecionado.volumeInfo.industryIdentifiers[0].identifier;
             }
@@ -58,7 +57,7 @@ import { BookService } from 'src/app/shared/services/book.service';
         }
         setTimeout(() => {
           this.spinner = false;
-        },500);
+        }, 500);
       });
       this.nomeUsuario = this.bookService.getName();
     }

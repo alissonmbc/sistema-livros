@@ -15,4 +15,4 @@ export type Book = {
         };
         industryIdentifiers: any;
     };
-}
+};

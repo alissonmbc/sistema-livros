@@ -23,3 +23,15 @@ $nb-themes: nb-register-theme(
 @import 'ag-grid-community/dist/styles/ag-grid.css';
 @import 'ag-grid-community/dist/styles/ag-theme-material.css';
 @import "~ag-grid-community/dist/styles/ag-theme-balham.css";
+
+::-webkit-scrollbar {
+  -webkit-appearance: none;
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 4px;
+  background-color: #ccc;
+  box-shadow: 0 0 1px rgba(204, 204, 204, 0.5);
+}

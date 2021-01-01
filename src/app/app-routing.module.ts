@@ -24,7 +24,7 @@ const routes: Routes = [
     { path: 'analise/:identifier', component: AnaliseComponent },
     { path: 'pareceres/:identifier', component: PareceresComponent }],
     runGuardsAndResolvers: 'always',
-  },];
+  }, ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes, { relativeLinkResolution: 'legacy' })],
