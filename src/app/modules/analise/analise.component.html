@@ -1,11 +1,11 @@
-<nb-card>
+<nb-card class="row">
     <nb-card-header>
-        <h6>Análise</h6>
+        <h6>Comparar</h6>
     </nb-card-header>
     <nb-card-body>
         <div>
             <form [formGroup]="form" (ngSubmit)="onSubmit(form.value)">
-                <input class="form-control" placeholder="Insira o nome de um livro..." formControlName="texto">
+                <input class="form-control" placeholder="Insira o nome de um livro para comparar..." formControlName="texto">
             </form>
         </div>
         <nb-tabset>

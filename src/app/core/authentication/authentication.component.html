@@ -2,17 +2,19 @@
     <nb-layout-column class="d-flex justify-content-center align-items-center">
         <nb-card>
             <nb-card-body>
-                <div class="d-flex justify-content-center">
+                <div class="d-flex justify-content-center mb-3">
                     <nb-icon icon="book-open-outline" status="success" class="large mb-1"></nb-icon>
+                    <h4 class="titulo ml-2">Papyrus</h4>
                 </div>
-                <div class="d-flex flex-row-reverse">
+                <div class="d-flex justify-content-center mb-3">
                     <button nbButton
                             status="success"
                             size="small"
                             (click)="login()">
                             <nb-icon icon="google-outline" status="success" class="large mb-1 text-white"></nb-icon>Login com o Google
                     </button>
-                </div>
+                </div>            
+                <small class="d-flex text-center">O sistema Papyrus utiliza uma conta do Google<br>para realizar seu cadastro e autenticação.</small>
             </nb-card-body>
         </nb-card>
     </nb-layout-column>

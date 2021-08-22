@@ -19,10 +19,10 @@ const routes: Routes = [
     path: '',
     component: LayoutComponent,
     children: [{ path: 'pesquisa/:keyword', component: HomeComponent },
-    { path: 'visao-geral/:identifier', component: VisaoGeralComponent },
-    { path: 'grafo/:identifier', component: GrafoComponent },
-    { path: 'analise/:identifier', component: AnaliseComponent },
-    { path: 'pareceres/:identifier', component: PareceresComponent }],
+    { path: 'interesse/:identifier', component: VisaoGeralComponent },
+    { path: 'grafos/:identifier', component: GrafoComponent },
+    { path: 'comparar/:identifier', component: AnaliseComponent },
+    { path: 'analise/:identifier', component: PareceresComponent }],
     runGuardsAndResolvers: 'always',
   }, ];
 

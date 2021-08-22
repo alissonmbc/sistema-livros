@@ -47,7 +47,7 @@ import * as Highcharts from 'highcharts';
                 type: 'line',
               },
               title: {
-                text: 'Interesse através do Tempo',
+                text: 'Interesse através do Tempo - Título',
               },
               subtitle: {
                 text: 'Fonte: Google Trends',
@@ -90,7 +90,7 @@ import * as Highcharts from 'highcharts';
                   type: 'line',
                 },
                 title: {
-                  text: 'Interesse através do Tempo',
+                  text: 'Interesse através do Tempo - Autores',
                 },
                 subtitle: {
                   text: 'Fonte: Google Trends',

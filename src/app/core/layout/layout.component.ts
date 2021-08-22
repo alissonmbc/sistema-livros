@@ -19,10 +19,10 @@ import { BookService } from 'src/app/shared/services/book.service';
     valor = '';
     nomeUsuario = '';
 
-    menuItems: any = [{title: 'Visão Geral', link: '/visao-geral/', icon: 'globe-outline'},
-    {title: 'Grafo', link: '/grafo/', icon: 'share-outline'},
-    {title: 'Análise', link: '/analise/', icon: 'grid-outline'},
-    {title: 'Pareceres', link: '/pareceres/', icon: 'message-square-outline'},
+    menuItems: any = [{title: 'Interesse', link: '/interesse/', icon: 'globe-outline'},
+    {title: 'Grafos', link: '/grafos/', icon: 'share-outline'},
+    {title: 'Comparar', link: '/comparar/', icon: 'grid-outline'},
+    {title: 'Análise', link: '/analise/', icon: 'message-square-outline'},
     {title: 'Sair', link: '/logout', icon: 'log-out-outline'}];
 
     form;

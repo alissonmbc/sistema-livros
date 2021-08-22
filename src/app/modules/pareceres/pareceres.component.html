@@ -1,12 +1,12 @@
-<nb-card>
+<nb-card class="row">
     <nb-card-header>
         <div class="row col-12">
             <div class="col-10">
-                <h6>Pareceres</h6>
+                <h6>Análise</h6>
             </div>
             <div class="col-2">
                 <button nbButton size="small" status="success" class="btn btn-success" [disabled]="escrevendo" (click)="exibirAreaTexto()">
-                    <nb-icon icon="plus-outline"></nb-icon> Novo Parecer
+                    <nb-icon icon="plus-outline"></nb-icon> Nova Observação
                 </button>
             </div>
         </div>
@@ -33,7 +33,7 @@
         </ag-grid-angular>
     </nb-card-body>
     <nb-card-footer *ngIf="parecerExibido !== ''">
-        <h6 class="mb-2">Parecer Selecionado</h6>
+        <h6 class="mb-2">Observação Selecionada</h6>
         <p style="white-space: pre-line">{{parecerExibido}}</p>
     </nb-card-footer>
 </nb-card>
