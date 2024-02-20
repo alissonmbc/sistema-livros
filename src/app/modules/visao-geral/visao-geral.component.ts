@@ -32,22 +32,20 @@ import * as Highcharts from 'highcharts';
     ngOnInit() {
       this.bookService.data$.subscribe(res => {
         if (res) {
-          this.http.get<any>('http://localhost:3000/interestOverTime/' + res.volumeInfo.title).pipe(map( data => {
-            return data;
-          })).subscribe(data => {
+          this.bookService.getTrendsHP().subscribe(data => {
             this.chartOptions = [];
             const series = [];
             const categories = [];
-            data.default.timelineData.forEach(element => {
-              series.push(element.value[0]);
-              categories.push(element.formattedAxisTime);
+            data.interest_over_time.timeline_data.forEach(element => {
+              series.push(element.values[0].extracted_value);
+              categories.push(element.date);
             });
             this.chartOptions.push({
               chart: {
                 type: 'line',
               },
               title: {
-                text: 'Interesse através do Tempo - Título',
+                text: 'Interesse no último ano - Título',
               },
               subtitle: {
                 text: 'Fonte: Google Trends',
@@ -76,21 +74,24 @@ import * as Highcharts from 'highcharts';
                 },
               ],
             });
-            this.http.get<any>('http://localhost:3000/interestOverTime/' + res.volumeInfo.authors[0]).pipe(map( interest => {
-              return interest;
-            })).subscribe( data2 => {
+            this.gridOptions.rowData = [];
+            for (let i = 0; i < 10; i++) {
+              if (data.interest_by_region.length > 0) {
+                this.gridOptions.rowData.push({regiao: data.interest_by_region[i].location, apice: data.interest_by_region[i].extracted_value});
+              }
+            }
+            this.gridAvailable = true;
+            this.bookService.getTrendsJK().subscribe( data2 => {
               const series2 = [];
-              const categories2 = [];
-              data2.default.timelineData.forEach(element => {
-                series2.push(element.value[0]);
-                categories2.push(element.formattedAxisTime);
+              data2.interest_over_time.timeline_data.forEach(element => {
+                series2.push(element.values[0].extracted_value);
               });
               this.chartOptions.push({
                 chart: {
                   type: 'line',
                 },
                 title: {
-                  text: 'Interesse através do Tempo - Autores',
+                  text: 'Interesse no último ano - Autores',
                 },
                 subtitle: {
                   text: 'Fonte: Google Trends',
@@ -101,7 +102,7 @@ import * as Highcharts from 'highcharts';
                   },
                 },
                 xAxis: {
-                  categories2,
+                  categories,
                 },
                 plotOptions: {
                   line: {
@@ -120,17 +121,6 @@ import * as Highcharts from 'highcharts';
                 ],
               });
             });
-          });
-          this.http.get<any>('http://localhost:3000/interestByRegion/' + res.volumeInfo.title).pipe(map( data => {
-            return data;
-          })).subscribe( data => {
-            this.gridOptions.rowData = [];
-            for (let i = 0; i < 10; i++) {
-              if (data.default.geoMapData[i] && data.default.geoMapData[i].value[0] > 0) {
-                this.gridOptions.rowData.push({regiao: data.default.geoMapData[i].geoName, apice: data.default.geoMapData[i].value[0]});
-              }
-            }
-            this.gridAvailable = true;
           });
         }
       });

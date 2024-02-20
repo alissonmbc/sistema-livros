@@ -30,6 +30,7 @@ import { AngularFireDatabaseModule } from '@angular/fire/database';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { MapaComponent } from './modules/mapa/mapa.component';
 
 registerLocaleData(localePt, 'pt-BR');
 
@@ -51,7 +52,8 @@ const config = {
     VisaoGeralComponent,
     GrafoComponent,
     AnaliseComponent,
-    PareceresComponent
+    PareceresComponent,
+    MapaComponent
   ],
   imports: [
     BrowserModule,

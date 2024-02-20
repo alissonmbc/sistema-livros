@@ -19,9 +19,11 @@ import { BookService } from 'src/app/shared/services/book.service';
     valor = '';
     nomeUsuario = '';
 
+    static dia = 1000 * 60 * 60 * 24;
+
     menuItems: any = [{title: 'Interesse', link: '/interesse/', icon: 'globe-outline'},
-    {title: 'Grafos', link: '/grafos/', icon: 'share-outline'},
-    {title: 'Comparar', link: '/comparar/', icon: 'grid-outline'},
+    {title: 'Tópicos Relacionados', link: '/topicos-relacionados/', icon: 'pantone-outline'},
+    {title: 'Mapa', link: '/mapa/', icon: 'map-outline'},
     {title: 'Análise', link: '/analise/', icon: 'message-square-outline'},
     {title: 'Sair', link: '/logout', icon: 'log-out-outline'}];
 
@@ -36,6 +38,9 @@ import { BookService } from 'src/app/shared/services/book.service';
        }
 
     ngOnInit() {
+      if(!localStorage.getItem(`user`) || (Date.now() - Number(localStorage.getItem(`expiration`))) > LayoutComponent.dia) {
+        this.bookService.logout();
+      }
       this.bookService.data$.subscribe(res => {
         this.spinner = true;
         this.livroSelecionado = res;
@@ -59,7 +64,7 @@ import { BookService } from 'src/app/shared/services/book.service';
           this.spinner = false;
         }, 500);
       });
-      this.nomeUsuario = this.bookService.getName();
+      this.nomeUsuario = this.bookService.getName(localStorage.getItem(`user`));
     }
 
     onSubmit(data) {

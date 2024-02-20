@@ -53,37 +53,29 @@ import * as Highcharts from 'highcharts';
         const series2 = [];
         this.bookService.data$.subscribe(res => {
           if (res) {
-            this.http.get<any>('http://localhost:3000/interestOverTime/' + res.volumeInfo.title).pipe(map( interest => {
-              return interest;
-            })).subscribe(data2 => {
-              data2.default.timelineData.forEach(element => {
-                series2.push(element.value[0]);
+            this.bookService.getTrendsHP().subscribe(data2 => {
+              data2.interest_over_time.timeline_data.forEach(element => {
+                series2.push(element.values[0].extracted_value);
               });
               this.titulo1 = res.volumeInfo.title;
+              this.gridOptions1.rowData = [];
+              for (let i = 0; i < 10; i++) {
+                if (data2.interest_by_region.length > 0) {
+                  this.gridOptions1.rowData.push({regiao: data2.interest_by_region[i]?.location, apice: data2.interest_by_region[i]?.extracted_value});
+                }
+              }
             });
           }
-          this.http.get<any>('http://localhost:3000/interestByRegion/' + res.volumeInfo.title).pipe(map( interest2 => {
-            return interest2;
-          })).subscribe(data3 => {
-            this.gridOptions1.rowData = [];
-            for (let i = 0; i < 10; i++) {
-              if (data3.default.geoMapData[i] && data3.default.geoMapData[i].value[0] > 0) {
-                this.gridOptions1.rowData.push({regiao: data3.default.geoMapData[i].geoName, apice: data3.default.geoMapData[i].value[0]});
-              }
-            }
-          });
         });
         this.bookService.search(data.texto).subscribe(res => {
           if (res) {
               this.titulo2 = res[0].volumeInfo.title;
-              this.http.get<any>('http://localhost:3000/interestOverTime/' + res[0].volumeInfo.title).pipe(map( interest3 => {
-                return interest3;
-              })).subscribe(data4 => {
+              this.bookService.getTrendsLOTR().subscribe(data4 => {
                 const series = [];
                 const categories = [];
-                data4.default.timelineData.forEach(element => {
-                  series.push(element.value[0]);
-                  categories.push(element.formattedAxisTime);
+                data4.interest_over_time.timeline_data.forEach(element => {
+                  series.push(element.values[0].extracted_value);
+                  categories.push(element.date);
                 });
                 this.chartOptions.push({
                   chart: {
@@ -124,14 +116,10 @@ import * as Highcharts from 'highcharts';
                     },
                   ],
                 });
-              });
-              this.http.get<any>('http://localhost:3000/interestByRegion/' + res[0].volumeInfo.title).pipe(map( interest4 => {
-                return interest4;
-              })).subscribe(data5 => {
                 this.gridOptions2.rowData = [];
                 for (let i = 0; i < 10; i++) {
-                  if (data5.default.geoMapData[i] && data5.default.geoMapData[i].value[0] > 0) {
-                    this.gridOptions2.rowData.push({regiao: data5.default.geoMapData[i].geoName, apice: data5.default.geoMapData[i].value[0]});
+                  if (data4.interest_by_region[i]) {
+                    this.gridOptions2.rowData.push({regiao: data4.interest_by_region[i].location, apice: data4.interest_by_region[i].extracted_value});
                   }
                 }
               });

@@ -20,11 +20,21 @@ import { BookService } from 'src/app/shared/services/book.service';
         rowData: []
     };
 
+    gridOptionsBookshelf = {
+        columnDefs: [
+            {headerName: 'Título', field: 'titulo', minWidth: 300},
+            {headerName: 'Autores', field: 'autores', minWidth: 300},
+            {headerName: 'Identificador', field: 'isbn', minWidth: 300}
+        ],
+        rowData: []
+    };
+
     books = [];
 
     constructor(private bookService: BookService) { }
 
     ngOnInit() {
+        this.bookService.getBookshelf().subscribe();
         this.bookService.url$.subscribe(keyword => {
             if (keyword && keyword !== '') {
                 this.bookService.search(keyword).subscribe(res => {

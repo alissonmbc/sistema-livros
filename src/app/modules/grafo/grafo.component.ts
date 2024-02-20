@@ -23,11 +23,10 @@ import { map } from 'rxjs/operators';
       this.bookService.data$.subscribe(res => {
         if (res) {
           const links = [];
-          this.http.get<any>('http://localhost:3000/relatedTopics/' + res.volumeInfo.title).pipe(map( data => {
-            return data;
-          })).subscribe(data => {
-            data.default.rankedList[0].rankedKeyword.forEach(element => {
-              if (element.value > 0) {
+          this.bookService.getTrendsHP().subscribe(data => {
+            data.related_topics.top.forEach(element => {
+              console.log(element.topic)
+              if(element.topic.type.toLowerCase().includes(`book`) || element.topic.type.toLowerCase().includes(`novel`)) {
                 links.push([res.volumeInfo.title, element.topic.title + ' - ' + element.topic.type]);
               }
             });
@@ -56,42 +55,6 @@ import { map } from 'rxjs/operators';
                   data: links,
                 },
               ],
-            });
-            this.http.get<any>('http://localhost:3000/relatedQueries/' + res.volumeInfo.title).pipe(map( queries => {
-              return queries;
-            })).subscribe(data2 => {
-              const links2 = [];
-              data2.default.rankedList[0].rankedKeyword.forEach(element => {
-                if (element.value > 0) {
-                  links2.push([res.volumeInfo.title, element.query]);
-                }
-              });
-              this.chartOptions.push({
-                chart: {
-                  type: 'networkgraph',
-                },
-                title: {
-                  text: 'Termos de Pesquisa Relacionados',
-                },
-                subtitle: {
-                  text: 'Fonte: Google Trends',
-                },
-                plotOptions: {
-                  networkgraph: {
-                    layoutAlgorithm: {
-                        linkLength: 50
-                    },
-                    link: {
-                        color: '#00d68f'
-                    }
-                  }
-                },
-                series: [
-                  {
-                    data: links2,
-                  },
-                ],
-              });
             });
           });
         }

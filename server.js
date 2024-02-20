@@ -12,6 +12,7 @@ app.get('/', (req, res) => {
 app.get('/interestOverTime/:keyword', (req, res) => {
   googleTrends.interestOverTime({keyword: req.params.keyword, category: '22'})
   .then((data) => {
+    console.log(data);
     res.json(JSON.parse(data));
   })
   .catch((err) => {

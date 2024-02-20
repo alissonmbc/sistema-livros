@@ -13,7 +13,7 @@
     </nb-card-header>
     <nb-card-body>
         <div *ngIf="escrevendo">
-            <textarea rows="3" class="form-control" placeholder="Escreva aqui o seu parecer..." [(ngModel)]="parecer"></textarea>
+            <textarea rows="3" class="form-control" placeholder="Escreva aqui a sua observação..." [(ngModel)]="parecer"></textarea>
             <br>
             <div class="d-flex flex-row-reverse">
                 <button nbButton size="small" status="success" class="btn btn-success pl-2" [disabled]="parecer === ''" (click)="salvarTexto()">
