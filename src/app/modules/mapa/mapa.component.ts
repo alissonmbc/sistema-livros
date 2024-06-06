@@ -44,6 +44,7 @@ export class MapaComponent implements OnInit {
         },
         colorAxis: {
           min: 0,
+          maxColor: '#00d68f'
         },
         series: [
           {

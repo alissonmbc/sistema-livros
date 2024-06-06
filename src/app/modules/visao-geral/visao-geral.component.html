@@ -1,19 +1,12 @@
 <nb-card class="row">
     <nb-card-header>
-        <h6>Interesse</h6>
+        <h6>Interesse no último ano</h6>
     </nb-card-header>
     <nb-card-body>
-        <nb-tabset>
+        <nb-tabset (changeTab)="tab()">
             <nb-tab tabTitle="Regiões">
-                <ag-grid-angular
-                    style="width: 100%; height: 150px;"
-                    class="ag-theme-balham"
-                    [rowData]="gridOptions.rowData"
-                    [columnDefs]="gridOptions.columnDefs"
-                    *ngIf="gridAvailable">
-                </ag-grid-angular>
             </nb-tab>
-            <nb-tab tabTitle="Histórico">
+            <nb-tab tabTitle="Gráfico semanal">
                 <div class="row d-flex justify-content-center" *ngIf="chartOptions.length > 1">
                     <highcharts-chart
                       [Highcharts]="highcharts"
@@ -30,7 +23,8 @@
                 </div>
             </nb-tab>
         </nb-tabset>
-        <p class="d-flex justify-content-center" *ngIf="!(chartOptions.length > 1) || !gridAvailable">Carregando...</p>
+        <p class="d-flex justify-content-center" *ngIf="!(chartOptions.length > 1) && !mapa">Carregando...</p>
+        <app-mapa *ngIf="mapa"></app-mapa>
     </nb-card-body>
     <nb-card-footer>
         <p>Segundo o Google, <i>“os números representam o interesse de pesquisa relativo ao ponto mais alto no gráfico de uma determinada região em um dado período. Um valor de 100 representa o pico de popularidade de um termo. Um valor de 50 significa que o termo teve metade da popularidade. Uma pontuação de 0 significa que não havia dados suficientes sobre o termo.”</i></p>

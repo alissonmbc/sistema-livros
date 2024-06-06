@@ -1,8 +1,5 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 
-import { HttpClient } from '@angular/common/http';
-import { map } from 'rxjs/operators';
-
 import { BookService } from 'src/app/shared/services/book.service';
 
 import * as Highcharts from 'highcharts';
@@ -16,18 +13,9 @@ import * as Highcharts from 'highcharts';
   export class VisaoGeralComponent implements OnInit {
     highcharts = Highcharts;
     chartOptions = [];
-    gridAvailable = false;
+    mapa = false;
 
-    gridOptions = {
-        columnDefs: [
-            {headerName: 'Região', field: 'regiao', minWidth: 450},
-            {headerName: 'Ápice de Interesse', field: 'apice', minWidth: 450}
-        ],
-        rowData: []
-    };
-
-    constructor(private bookService: BookService,
-                private http: HttpClient) { }
+    constructor(private bookService: BookService) { }
 
     ngOnInit() {
       this.bookService.data$.subscribe(res => {
@@ -74,13 +62,6 @@ import * as Highcharts from 'highcharts';
                 },
               ],
             });
-            this.gridOptions.rowData = [];
-            for (let i = 0; i < 10; i++) {
-              if (data.interest_by_region.length > 0) {
-                this.gridOptions.rowData.push({regiao: data.interest_by_region[i].location, apice: data.interest_by_region[i].extracted_value});
-              }
-            }
-            this.gridAvailable = true;
             this.bookService.getTrendsJK().subscribe( data2 => {
               const series2 = [];
               data2.interest_over_time.timeline_data.forEach(element => {
@@ -124,6 +105,10 @@ import * as Highcharts from 'highcharts';
           });
         }
       });
+    }
+
+    tab(): void {
+      this.mapa = !this.mapa;
     }
 
 }

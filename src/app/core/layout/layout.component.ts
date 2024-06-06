@@ -23,7 +23,6 @@ import { BookService } from 'src/app/shared/services/book.service';
 
     menuItems: any = [{title: 'Interesse', link: '/interesse/', icon: 'globe-outline'},
     {title: 'Tópicos Relacionados', link: '/topicos-relacionados/', icon: 'pantone-outline'},
-    {title: 'Mapa', link: '/mapa/', icon: 'map-outline'},
     {title: 'Análise', link: '/analise/', icon: 'message-square-outline'},
     {title: 'Sair', link: '/logout', icon: 'log-out-outline'}];
 
