@@ -25,8 +25,8 @@ import { NbEvaIconsModule } from '@nebular/eva-icons';
 import {AgGridModule} from 'ag-grid-angular';
 import {HighchartsChartModule} from 'highcharts-angular';
 
-import { AngularFireModule } from '@angular/fire';
-import { AngularFireDatabaseModule } from '@angular/fire/database';
+import { AngularFireModule } from '@angular/fire/compat';
+import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';

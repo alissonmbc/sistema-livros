@@ -1,5 +1,5 @@
-@import '~@nebular/theme/styles/theming';
-@import '~@nebular/theme/styles/themes/default';
+@import '@nebular/theme/styles/theming';
+@import '@nebular/theme/styles/themes/default';
 
 $nb-themes: nb-register-theme(
   (
@@ -12,7 +12,7 @@ $nb-themes: nb-register-theme(
   default
 );
 
-@import "~@nebular/theme/styles/globals";
+@import "@nebular/theme/styles/globals";
 
 @include nb-install() {
     @include nb-theme-global();
@@ -20,9 +20,9 @@ $nb-themes: nb-register-theme(
 
 @import '~bootstrap/dist/css/bootstrap.min.css';
 
-@import 'ag-grid-community/dist/styles/ag-grid.css';
-@import 'ag-grid-community/dist/styles/ag-theme-material.css';
-@import "~ag-grid-community/dist/styles/ag-theme-balham.css";
+@import 'ag-grid-community/styles/ag-grid.css';
+@import 'ag-grid-community/styles/ag-theme-material.css';
+@import "ag-grid-community/styles/ag-theme-balham.css";
 
 ::-webkit-scrollbar {
   -webkit-appearance: none;
